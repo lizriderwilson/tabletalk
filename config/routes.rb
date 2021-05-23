@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   resources :campaigns do
-    resources :sessions, :characters
+    resources :sessions, controller: :seshion #create new controller with changed spelling to not conflict with SessionsController for user sessions
+    resources :characters
   end
 end
