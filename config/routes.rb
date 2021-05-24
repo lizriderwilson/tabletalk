@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  get 'static/index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  # Homepage
+  root 'static#index'
+
+  # Sessions
+  get '/login', to: 'sessions#new' 
+  post '/login', to: 'sessions#create'
 
   resources :users do
     resources :campaigns, only: [:index]
