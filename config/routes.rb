@@ -6,11 +6,14 @@ Rails.application.routes.draw do
   # Sessions
   get '/login', to: 'sessions#new' 
   post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
 
   resources :users do
     resources :campaigns, only: [:index]
     resources :characters, only: [:index, :show, :edit, :update]
   end
+
+  get '/signup', to: 'users#new'
 
   resources :campaigns do
     resources :sessions, controller: :seshion #create new controller with changed spelling to not conflict with SessionsController for user sessions
