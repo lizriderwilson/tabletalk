@@ -9,11 +9,13 @@ class UsersController < ApplicationController
 
     def create
         @user = User.create(user_params)
-        redirect_to new_user_path unless @user.save
+        return redirect_to new_user_path unless @user.save
         session[:user_id] = @user.id
+        redirect_to user_path(@user)
     end
 
     def show
+        @user = User.find_by(id: params[:id])
     end
 
     def edit
