@@ -1,25 +1,25 @@
-<div class="bg-primary-200 w-full md:w-2/3 p-4">
+
     <%= form_for @user do |f| %>
-        <div>
-            <%= f.label :email %>
-            <%= f.text_field :email %>
+    <div class="flex flex-col items-center">
+        <div class="mb-3">
+            <%= f.label :email, class: "" %></br>
+            <%= f.text_field :email, class: "session-text-field" %>
         </div>
-        <div>
-            <%= f.label :username %>
-            <%= f.text_field :username %>
+        <div class="mb-3">
+            <%= f.label :username, class: "" %></br>
+            <%= f.text_field :username, class: "session-text-field" %>
         </div>
-        <div>
-            <%= f.label :password %>
-            <%= f.text_field :password %>
+        <div class="mb-3">
+            <%= f.label :password, class: "" %></br>
+            <%= f.password_field :password, class: "session-text-field" %>
         </div>
-        <div>
-            <%= f.label :password_confirmation %>
-            <%= f.text_field :password_confirmation %>
+        <div class="mb-3">
+            <%= f.label :password_confirmation, class: "" %></br>
+            <%= f.password_field :password_confirmation, class: "session-text-field" %>
         </div>
-        <%= f.submit "Submit" %>
+        <%= f.submit "Sign Up", class: "bg-primary-500 hover:bg-primary-600 text-white my-3 px-4 py-3 rounded-xl" %>
     <% end %>
-
-    <p>or</p>
-
-    <%= link_to image_tag("btn_google_signin_light_normal_web.png"), '/auth/google_oauth2', method: 'post' %>
+    <hr class="border-1 w-11/12 border-primary-600 m-3">
+    <%= link_to image_tag("btn_google_signin_light_normal_web.png"), '/auth/google_oauth2', method: 'post', class: "m-3" %>
+    <p>Already have an account? <%= link_to "Login here!", login_path, class: "text-primary-500" %></p>
 </div>
