@@ -4,5 +4,6 @@
         Password: <%= f.password_field :password %>
         Password Confirmation: <%= f.password_field :password_confirmation %>
     <%= f.submit "Submit" %>
-<% end %> 
+    <% end %> 
+    <%= link_to image_tag("btn_google_signin_light_normal_web.png"), '/auth/google_oauth2', method: 'post' %>
 </div>
