@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'campaigns/index'
+  get 'campaigns/new'
+  get 'campaigns/create'
+  get 'campaigns/show'
+  get 'campaigns/edit'
+  get 'campaigns/update'
+  get 'campaigns/destroy'
   # Homepage
   root 'static#index'
 
