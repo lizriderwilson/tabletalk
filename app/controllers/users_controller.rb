@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     end
 
     def new
+    raise params.inspect
         @user = User.new
     end
 
@@ -16,9 +17,11 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find_by(id: params[:id])
+        @campaigns = @user.campaigns.all
     end
 
     def edit
+        @user = User.find_by(id: params[:id])
     end
 
     def update

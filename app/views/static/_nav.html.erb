@@ -14,8 +14,8 @@
             </div>
         </div>
         <div class="bg-primary-700 sm:bg-primary-800 px-4 py-3 pb-4 text-right sm:flex sm:items-center">
-            <a href="#" class="block sm:inline-block sm:px-2 rounded py-0.5 text-secondary-200 hover:bg-primary-900">Campaigns</a>
-            <a href="#" class="block sm:inline-block sm:px-2 rounded py-0.5 text-secondary-200 hover:bg-primary-900">Players</a>
+            <%= link_to "Campaigns", campaigns_path, class: "block sm:inline-block sm:px-2 rounded py-0.5 text-secondary-200 hover:bg-primary-900" %>
+            <%= link_to "Players", users_path, class: "block sm:inline-block sm:px-2 rounded py-0.5 text-secondary-200 hover:bg-primary-900" %>
             <%= link_to current_user.username, user_path(current_user) if current_user %>
         </div>
     </div>
