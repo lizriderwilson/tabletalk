@@ -2,23 +2,33 @@ class CampaignsController < ApplicationController
   before_action :find_campaign, only: [:show, :edit, :update, :destroy]
 
   def index
-    @public_campaigns = Campaign.all.where(is_public: true)
+    if params[:user_id]
+      @campaigns = User.find_by(id: params[:user_id]).campaigns
+    else
+      @campaigns = Campaign.all.where(is_public: true)
+    end
   end
 
   def new
-    @campaign = Campaign.new
+    @campaign = Campaign.new(gm_id: params[:user_id])
   end
 
   def create
+    @campaign = Campaign.new(campaign_params)
+    @campaign.save
+    redirect_to campaign_path(@campaign)
   end
 
   def show
   end
 
   def edit
+
   end
 
   def update
+    @campaign.update(campaign_params)
+    redirect_to campaign_path(@campaign)
   end
 
   def destroy
@@ -31,7 +41,7 @@ class CampaignsController < ApplicationController
   end
 
   def campaign_params
-    params.require(:campaign).permit(:name, :description, :game_system, :is_public)
+    params.require(:campaign).permit(:name, :description, :game_system, :is_public, :gm_id)
   end
 
 end

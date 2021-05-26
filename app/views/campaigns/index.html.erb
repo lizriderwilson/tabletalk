@@ -1,21 +1,21 @@
 <div class="container mx-auto mt-12 my-4 flex flex-col" id="header">
 
     <div class="mb-8">
-        <h1 class="text-4xl font-bold mb-1">Public Campaigns</h1>
+        <h1 class="header mb-1">Public Campaigns</h1>
         <p>These campaigns are public and accepting new players! Feel free to browse this list to find a game you'd like to join.</p>
     </div>
 
-    <div class="flex gap-2">
-        <% @public_campaigns.each do |c| %>
-        <div class="bg-secondary-100 w-1/4 h-60 p-4">
+    <div class="grid grid-cols-4 gap-2">
+        <% @campaigns.each do |c| %>
+        <div class="bg-secondary-100 h-60 p-4">
             <%= link_to c.name, campaign_path(c), class: "text-2xl font-semibold" %>
             <p><%= c.game_system %></p>
             <p>Next session: 7/1/2021</p>
         </div>
         <% end %>
-        <div class="w-1/4 h-60 bg-secondary-100"></div>
-        <div class="w-1/4 h-60 bg-secondary-100"></div>
-        <div class="w-1/4 h-60 bg-secondary-100"></div>
+        <div class="h-60 bg-secondary-100"></div>
+        <div class="h-60 bg-secondary-100"></div>
+        <div class="h-60 bg-secondary-100"></div>
     </div>
 
 </div>

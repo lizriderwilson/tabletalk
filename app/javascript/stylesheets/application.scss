@@ -17,4 +17,8 @@
     @apply hover:bg-primary-600
 }
 
+.header {
+    @apply text-4xl font-bold
+}
+
 @import "tailwindcss/utilities";
