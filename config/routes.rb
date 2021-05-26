@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create_by_omniauth'
 
   resources :users do
-    resources :campaigns, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :campaigns, only: [:index, :new, :create, :destroy]
     resources :characters, only: [:index, :show, :edit, :update]
   end
 
