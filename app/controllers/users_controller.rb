@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find_by(id: params[:id])
-        @campaigns = @user.campaigns.all
+        @campaigns = @user.campaigns
     end
 
     def edit
