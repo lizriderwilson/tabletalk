@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :campaigns, foreign_key: 'gm_id'
+  has_many :campaigns_as_gm, class_name: 'Campaign', foreign_key: 'gm_id'
+  has_many :characters
 
   validates :email, presence: true, uniqueness: true
   validates :username, presence: true, uniqueness: true
