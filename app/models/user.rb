@@ -19,4 +19,8 @@ class User < ApplicationRecord
     self.campaigns_as_gm + self.campaigns_as_player
   end
 
+  def character(id)
+    Character.find_by_sql ["SELECT * FROM characters WHERE player_id = ? AND campaign_id = ? LIMIT 1", self.id, id]
+  end
+
 end

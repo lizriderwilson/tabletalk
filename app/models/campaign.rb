@@ -6,4 +6,5 @@ class Campaign < ApplicationRecord
     def visibility
         self.is_public ? "Public" : "Private"
     end
+
 end

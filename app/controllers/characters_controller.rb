@@ -6,13 +6,16 @@ class CharactersController < ApplicationController
 
     def new
         @character = Character.new(campaign_id: params[:campaign_id])
-        #byebug
+        redirect_if_player_already_joined
     end
 
     def create
         @character = Character.new(character_params)
-        @character.save
-        redirect_to campaign_character_path(@character.campaign, @character)
+        if @character.save
+            redirect_to campaign_character_path(@character.campaign, @character)
+        else
+            render :new
+        end
     end
 
     def show
@@ -31,6 +34,12 @@ class CharactersController < ApplicationController
 
     def find_character
         @character = Character.find_by(id: params[:id])
+    end
+
+    def redirect_if_player_already_joined 
+        if Campaign.find_by(id: params[:campaign_id]).players.include?(helpers.current_user)
+            redirect_to campaign_path(Campaign.find_by(id: params[:campaign_id]))
+        end
     end
 
     def character_params
