@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :campaigns, only: [:index, :new, :create, :edit, :destroy]
-    resources :characters, only: [:index, :show, :edit, :update]
+    resources :characters, only: [:index]
   end
 
   resources :campaigns, only: [:index, :show, :update] do
