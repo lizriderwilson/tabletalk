@@ -1,0 +1,20 @@
+<div class="container mx-auto mt-12 my-4 flex flex-col" id="header">
+
+    <div class="mb-8">
+        <h1 class="header mb-1">Characters</h1>
+        <p>All characters</p>
+    </div>
+
+    <div class="grid grid-cols-4 gap-2">
+        <% @characters.each do |ch| %>
+        <div class="bg-secondary-100 h-60 p-4">
+            <%= link_to ch.name, campaign_character_path(ch.campaign, ch), class: "text-2xl font-semibold" %>
+            <p><%= ch.player.username %></p>
+        </div>
+        <% end %>
+        <div class="h-60 bg-secondary-100"></div>
+        <div class="h-60 bg-secondary-100"></div>
+        <div class="h-60 bg-secondary-100"></div>
+    </div>
+
+</div>

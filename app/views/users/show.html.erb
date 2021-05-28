@@ -15,13 +15,35 @@
                         <%= link_to c.name, campaign_path(c) %>
                         <p><%= c.game_system %></p>
                         <p>Next session: 7/1/2021</p>
-                            <%= link_to "Go to game", campaign_path(c), class: "bg-secondary-200 p-2" %>
-                            <%= link_to "Edit", edit_user_campaign_path(c), class: "bg-secondary-200 p-2" if c.gm == current_user %>
+                            <div>
+                                <%= link_to "Go to game", campaign_path(c), class: "bg-secondary-200 p-2" %>
+                                <%= link_to "Edit", edit_user_campaign_path(current_user, c), class: "bg-secondary-200 p-2" if c.gm == current_user %>
+                            </div>
                     </div>
                 <% end %>
             </div>
             <div class="flex justify-end">
                 <%= link_to "All Games", user_campaigns_path(@user), class: "btn" %>
+            </div>
+        </div>
+        
+        <div class="bg-primary-100 flex flex-col px-8 pb-4" id="characters">
+            <div class="py-8 flex justify-between items-center">
+                <h2 class="header">Your Characters</h2>
+            </div>
+            <div class="grid grid-cols-3 gap-2 mb-4">
+                <% @characters.each do |ch| %>
+                    <div class="bg-secondary-50">
+                        <%= link_to ch.name, campaign_character_path(@user,ch) %>
+                        <div>
+                            <%= link_to "View", campaign_character_path(@user,ch), class: "bg-secondary-200 p-2" %>
+                            <%= link_to "Edit", edit_campaign_character_path(ch.campaign, ch), class: "bg-secondary-200 p-2" if ch.player == current_user %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+            <div class="flex justify-end">
+                <%= link_to "All Characters", user_characters_path(@user), class: "btn" %>
             </div>
         </div>
     </div>
