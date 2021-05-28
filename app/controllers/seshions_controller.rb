@@ -15,6 +15,7 @@ class SeshionsController < ApplicationController
   end
 
   def show
+    @campaign = @seshion.campaign
   end
 
   def edit

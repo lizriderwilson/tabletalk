@@ -8,4 +8,8 @@ class Campaign < ApplicationRecord
         self.is_public ? "Public" : "Private"
     end
 
+    def self.public
+        where(is_public: true)
+    end
+
 end
