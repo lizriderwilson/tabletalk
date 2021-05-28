@@ -21,4 +21,22 @@
     @apply text-4xl font-bold
 }
 
+/* Calendar */
+
+.simple-calendar {
+    @apply w-full
+}
+
+.calendar-heading {
+    @apply flex justify-between
+}
+
+.table {
+    @apply w-full
+}
+
+td {
+    @apply text-center
+}
+
 @import "tailwindcss/utilities";
