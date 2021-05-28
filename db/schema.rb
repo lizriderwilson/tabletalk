@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_27_034823) do
+ActiveRecord::Schema.define(version: 2021_05_28_154202) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string "name"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(version: 2021_05_27_034823) do
     t.string "name"
     t.text "bio"
     t.integer "player_id"
+    t.integer "campaign_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "seshions", force: :cascade do |t|
+    t.datetime "start_time"
     t.integer "campaign_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

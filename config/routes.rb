@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'seshions/index'
+  get 'seshions/show'
+  get 'seshions/new'
+  get 'seshions/edit'
   # Homepage
   root 'static#index'
 
@@ -16,7 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :campaigns, only: [:index, :show, :update] do
-    resources :seshions, path: 'session', as: 'session' #Campaign_sessions renamed 'seshions' to not conflict with Sessions Controller, path and helper names overridden for clarity
+    resources :seshions, path: 'sessions' #Campaign_sessions renamed 'seshions' to not conflict with Sessions Controller, path and helper names overridden for clarity
     resources :characters
   end
 end
