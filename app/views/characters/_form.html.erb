@@ -1,0 +1,18 @@
+<%= form_for [@character.campaign, @character] do |f| %>
+    <%= f.hidden_field :player_id, value: current_user.id %>
+    <%= f.hidden_field :campaign_id %>
+    <div class="flex flex-col items-center">
+        <div class="mb-3">
+            <label for="character_player_id"><%= current_user.username %></label>
+        </div>
+        <div class="mb-3">
+            <%= f.label :name, class: "" %></br>
+            <%= f.text_field :name, class: "session-text-field" %>
+        </div>
+        <div class="mb-3">
+            <%= f.label :bio, class: "" %></br>
+            <%= f.text_area :bio, class: "session-text-field" %>
+        </div>
+        <%= f.submit "Create Character", class: "btn my-3" %>
+    </div>
+<% end %>
