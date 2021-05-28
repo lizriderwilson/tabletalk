@@ -21,7 +21,7 @@
         <div class="px-6 py-4" id="players">
             <h3 class="text-2xl font-semibold">Players</h3>
             <% @campaign.players.each do |player| %>
-                <p><%= player.username %> (<%= player.character(@campaign.id).first.name %>)</p>
+                <p><%= player.username %> (<%= character(player).name %>)</p>
             <% end %>
         </div>
         <div class="px-6 py-4" id="sessions">

@@ -6,7 +6,7 @@ class CharactersController < ApplicationController
 
     def new
         @character = Character.new(campaign_id: params[:campaign_id])
-        redirect_if_player_already_joined
+        redirect_if_user_is_gm_or_already_joined
     end
 
     def create
@@ -25,6 +25,8 @@ class CharactersController < ApplicationController
     end
 
     def update
+        @character.update(character_params)
+        redirect_to campaign_character_path(@character.campaign, @character)
     end
 
     def destroy
@@ -36,8 +38,9 @@ class CharactersController < ApplicationController
         @character = Character.find_by(id: params[:id])
     end
 
-    def redirect_if_player_already_joined 
-        if Campaign.find_by(id: params[:campaign_id]).players.include?(helpers.current_user)
+    def redirect_if_user_is_gm_or_already_joined
+        campaign = Campaign.find_by(id: params[:campaign_id])
+        if helpers.current_user == campaign.gm || campaign.players.include?(helpers.current_user)
             redirect_to campaign_path(Campaign.find_by(id: params[:campaign_id]))
         end
     end
