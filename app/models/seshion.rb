@@ -1,0 +1,2 @@
+class Seshion < ApplicationRecord
+end
