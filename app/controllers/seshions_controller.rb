@@ -2,6 +2,7 @@ class SeshionsController < ApplicationController
   before_action :find_seshion, only: [:show, :edit, :update, :destroy]
 
   def index
+    @seshions = Campaign.find_by(id: params[:campaign_id]).seshions
   end
 
   def show
