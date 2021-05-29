@@ -12,6 +12,7 @@ class CharactersController < ApplicationController
 
     def create
         @character = Character.new(character_params)
+        byebug
         if @character.save
             redirect_to campaign_character_path(@character.campaign, @character)
         else

@@ -12,6 +12,9 @@ class SeshionsController < ApplicationController
   end
 
   def create
+    @seshion = Seshion.new(seshion_params)
+    @seshion.save
+    redirect_to campaign_path(@seshion.campaign)
   end
 
   def show
