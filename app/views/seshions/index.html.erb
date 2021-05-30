@@ -6,7 +6,7 @@
                 <h1 class="header">Sessions</h1>
                 <%= link_to "New Session", new_campaign_seshion_path(@campaign), class: "btn" if @campaign.gm == current_user%>
             </div>
-            <% @seshions.each do |seshion| %>
+            <% @seshions.oldest_to_newest.each do |seshion| %>
                 <div><%= link_to seshion.start_time.to_formatted_s(:month_day), campaign_seshion_path(seshion.campaign, seshion) %></div>
             <% end %>
         </div>
@@ -18,7 +18,7 @@
                 <%= date.day %>
                 <% seshions.each do |seshion| %>
                     <div>
-                        <%= seshion.start_time.to_formatted_s(:twelvehrs) %>
+                        <%= link_to seshion.start_time.to_formatted_s(:twelvehrs), campaign_seshion_path(@campaign, seshion) %>
                     </div>
                 <% end %>
             <% end %>

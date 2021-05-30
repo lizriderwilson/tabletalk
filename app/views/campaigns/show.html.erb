@@ -27,7 +27,7 @@
         <div class="px-6 py-4" id="upcoming-sessions">
             <h3 class="text-2xl font-semibold">Upcoming Sessions</h3>
             <div>
-                <% @campaign.upcoming_seshions.each do |seshion| %>
+                <% @campaign.upcoming_seshions.oldest_to_newest.each do |seshion| %>
                     <div><%= seshion.start_time.to_formatted_s(:month_day_comma_year_time) %></div>
                 <% end %>
             </div>
