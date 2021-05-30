@@ -1,5 +1,6 @@
 class Seshion < ApplicationRecord
     belongs_to :campaign
+    has_many :notes, as: :commentable
 
     def self.oldest_to_newest
         self.order(:start_time)

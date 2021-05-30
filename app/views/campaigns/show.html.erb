@@ -15,6 +15,14 @@
                 <p class="btn">GM: <%= @campaign.gm.username %></p>
             </div>
         </div>
+        <div class="bg-primary-100 flex flex-col px-8 pb-4" id="description">
+            <div class="py-8 flex flex-col">
+                <h2 class="header mb-2">Recent Notes</h2>
+                <% @campaign.notes.each do |note| %>
+                    <div><%= note.content %></div>
+                <% end %>
+            </div>
+        </div>
     </div>
 
     <div class="bg-primary-200 h-screen w-1/3">
