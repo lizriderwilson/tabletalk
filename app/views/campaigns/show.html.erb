@@ -31,14 +31,8 @@
                     <div><%= seshion.start_time.to_formatted_s(:month_day_comma_year_time) %></div>
                 <% end %>
             </div>
-        </div>
-        <div class="px-6 py-4" id="upcoming-sessions">
-            <h3 class="text-2xl font-semibold">Past Sessions</h3>
-            <div>
-                <% @campaign.past_seshions.each do |seshion| %>
-                    <div><%= seshion.start_time.to_formatted_s(:month_day_comma_year_time) %></div>
-                <% end %>
-            </div>
+            <%= link_to "View All Sessions", campaign_seshions_path(@campaign), class: "inline-block w-full mt-4 py-2 bg-primary-500 text-center" %>
+            <%= link_to "New Session", new_campaign_seshion_path(@campaign), class: "inline-block w-full mt-4 py-2 bg-primary-500 text-center" if @campaign.gm == current_user%>
         </div>
     </div>
 

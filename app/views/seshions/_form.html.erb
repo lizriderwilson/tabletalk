@@ -1,5 +1,5 @@
-<%= form_for [@seshion.campaign, @seshion] do |f| %>
+<%= form_for [@campaign, @seshion] do |f| %>
     <%= f.hidden_field :campaign_id %>
     <%= f.datetime_select :start_time %>
-    <%= f.submit "Create Session" %>
+    <%= f.submit %>
 <% end %>

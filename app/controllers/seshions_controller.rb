@@ -1,8 +1,9 @@
 class SeshionsController < ApplicationController
+  before_action :find_campaign
   before_action :find_seshion, only: [:show, :edit, :update, :destroy]
 
   def index
-    @seshions = Campaign.find_by(id: params[:campaign_id]).seshions
+    @seshions = @campaign.seshions
   end
 
   def show
@@ -19,13 +20,14 @@ class SeshionsController < ApplicationController
   end
 
   def show
-    @campaign = @seshion.campaign
   end
 
   def edit
   end
 
   def update
+    @seshion.update(seshion_params)
+    redirect_to campaign_seshion_path(@campaign, @seshion)
   end
 
   def destroy
@@ -33,6 +35,10 @@ class SeshionsController < ApplicationController
 
   private
 
+  def find_campaign
+    @campaign = Campaign.find_by(id: params[:campaign_id])
+  end
+  
   def find_seshion
     @seshion = Seshion.find_by(id: params[:id])
   end

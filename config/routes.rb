@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'seshions/index'
-  get 'seshions/show'
-  get 'seshions/new'
-  get 'seshions/edit'
   # Homepage
   root 'static#index'
 

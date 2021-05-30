@@ -1,13 +1,28 @@
-<div class="container mx-auto">
-    <div class="px-6 py-4" id="sessions">
-        <h3 class="text-2xl font-semibold">Sessions</h3>
-        <%= month_calendar(events: @seshions) do |date, seshions| %>
-            <%= date.day %>
-            <% seshions.each do |seshion| %>
-                <div>
-                    <%= seshion.start_time.to_formatted_s(:twelvehrs) %>
-                </div>
+<div class="container mx-auto mt-4 flex">
+
+    <div class="w-1/2">
+        <div class="py-4">
+            <div class="flex justify-between">
+                <h1 class="header">Sessions</h1>
+                <%= link_to "New Session", new_campaign_seshion_path(@campaign), class: "btn" if @campaign.gm == current_user%>
+            </div>
+            <% @seshions.each do |seshion| %>
+                <div><%= link_to seshion.start_time.to_formatted_s(:month_day), campaign_seshion_path(seshion.campaign, seshion) %></div>
             <% end %>
-        <% end %>
+        </div>
     </div>
+    <div class="w-1/2">
+        <div class="py-4">
+            <h3 class="text-2xl font-semibold mb-2">Calendar</h3>
+            <%= month_calendar(events: @seshions) do |date, seshions| %>
+                <%= date.day %>
+                <% seshions.each do |seshion| %>
+                    <div>
+                        <%= seshion.start_time.to_formatted_s(:twelvehrs) %>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+
 </div>
