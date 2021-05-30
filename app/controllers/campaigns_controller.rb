@@ -5,7 +5,7 @@ class CampaignsController < ApplicationController
     if params[:user_id]
       @campaigns = User.find_by(id: params[:user_id]).campaigns
     else
-      @campaigns = Campaign.all.where(is_public: true)
+      @campaigns = Campaign.public
     end
   end
 

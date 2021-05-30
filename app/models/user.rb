@@ -19,4 +19,10 @@ class User < ApplicationRecord
     self.campaigns_as_gm + self.campaigns_as_player
   end
 
+  def seshions
+    self.campaigns.map do |campaign|
+      campaign.seshions
+    end.flatten
+  end
+
 end

@@ -3,7 +3,9 @@
     <div class="container mx-auto sm:flex sm:justify-between">
         <div class="flex items-center justify-between px-5 py-4">
             <div>
-                <%= image_tag "TableTalkLogo.png", class: "h-8 md:h-12" %>
+                <%= link_to root_path do %>
+                    <%= image_tag "TableTalkLogo.png", class: "h-8 md:h-12" %>
+                <% end %>
             </div>
             <div class="flex items-center sm:hidden">
                 <button type="button" class="text-secondary-200 hover:text-secondary-100">

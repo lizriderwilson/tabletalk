@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :campaigns, only: [:index, :show, :update] do
-    resources :sessions, controller: :seshion #create new controller with changed spelling to not conflict with SessionsController for user sessions
+    resources :seshions, path: 'sessions' #Campaign_sessions renamed 'seshions' to not conflict with Sessions Controller, path and helper names overridden for clarity
     resources :characters
   end
 end

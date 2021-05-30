@@ -26,6 +26,8 @@ gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
 gem 'dotenv-rails'
 
+gem "simple_calendar", "~> 2.4"
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

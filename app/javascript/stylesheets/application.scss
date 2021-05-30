@@ -21,4 +21,26 @@
     @apply text-4xl font-bold
 }
 
+/* Calendar */
+
+.simple-calendar {
+    @apply w-full text-xs bg-primary-100 rounded p-2
+}
+
+.calendar-heading {
+    @apply flex justify-between
+}
+
+.table {
+    @apply w-full
+}
+
+tr {
+    @apply grid grid-cols-7 gap-1 mt-1
+}
+
+td {
+    @apply h-16 bg-secondary-50
+}
+
 @import "tailwindcss/utilities";

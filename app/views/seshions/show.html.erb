@@ -1,0 +1,11 @@
+<div class="container mx-auto mt-8">
+    <div class="flex justify-between">
+        <div>
+            <h1 class="header"><%= @campaign.name %> - <%= @seshion.start_time.to_s(:month_day) %></h1>
+            <%= link_to "< Back to all sessions", campaign_seshions_path(@campaign) %>
+        </div>
+        <div>
+            <%= link_to "Edit Session", edit_campaign_seshion_path(@campaign, @seshion), class: "btn" if @campaign.gm == current_user%>
+        </div>
+    </div>
+</div>
