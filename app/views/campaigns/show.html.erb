@@ -17,8 +17,11 @@
         </div>
         <div class="bg-primary-100 flex flex-col px-8 pb-4" id="description">
             <div class="py-8 flex flex-col">
-                <h2 class="header mb-2">Recent Notes</h2>
-                <% @campaign.notes.each do |note| %>
+                <h2 class="header mb-2">Campaign Notes</h2>
+                <div class="py-2">
+                    <%= render partial: 'notes/form', locals: {commentable: @campaign} %>
+                </div>
+                <% @notes.each do |note| %>
                     <div><%= note.content %></div>
                 <% end %>
             </div>

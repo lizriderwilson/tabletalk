@@ -16,7 +16,12 @@ Rails.application.routes.draw do
   end
 
   resources :campaigns, only: [:index, :show, :update] do
-    resources :seshions, path: 'sessions' #Campaign_sessions renamed 'seshions' to not conflict with Sessions Controller, path and helper names overridden for clarity
     resources :characters
+    resources :notes, module: :campaigns
+    resources :seshions, path: 'sessions' do #Campaign_sessions renamed 'seshions' to not conflict with Sessions Controller, path and helper names overridden for clarity
+      resources :notes, module: :seshions
+    end
   end
+
+  resources :notes, only: [:create, :edit, :update, :destroy]
 end
