@@ -9,3 +9,14 @@
         </div>
     </div>
 </div>
+<div class="bg-primary-100 flex flex-col px-8 pb-4" id="description">
+    <div class="py-8 flex flex-col">
+        <h2 class="header mb-2">Seshion Notes</h2>
+        <div class="py-2">
+            <%= render partial: 'notes/form', locals: {commentable: @seshion, path: campaign_seshion_notes_path(@campaign, @seshion, @note) } %>
+        </div>
+        <% @notes.each do |note| %>
+            <div><%= note.content %> <%= link_to "Edit", edit_note_path(note) %></div>
+        <% end %>
+    </div>
+</div>

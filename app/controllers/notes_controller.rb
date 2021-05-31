@@ -1,17 +1,23 @@
 class NotesController < ApplicationController
-  before_action :find_note, only: [:update, :destroy]
+  before_action :find_note, only: [:edit, :update, :destroy]
 
-  def create
-    @note = @commentable.notes.new(note_params)
-    @note.user = helpers.current_user
-    @note.save
-    redirect_to @commentable
-  end
+  # def create
+  #   @note = @commentable.notes.new(note_params)
+  #   @note.user = helpers.current_user
+  #   @note.save
+  #   # redirect_to @commentable
+  # end
 
   def edit
   end
 
   def update
+    @note.update(note_params)
+    if @note.commentable_type == "Campaign"
+      redirect_to campaign_path(@note.commentable)
+    elsif @note.commentable_type == "Seshion"
+      redirect_to campaign_seshion_path(@note.commentable.campaign, @note.commentable)
+    end
   end
 
   def destroy

@@ -1,4 +1,4 @@
-<%= form_for [commentable, @note] do |f| %>
+<%= form_for [commentable, @note], url: path do |f| %>
     <%= f.text_area :content, placeholder: "Add a comment" %>
     <%= f.submit %>
 <% end %>

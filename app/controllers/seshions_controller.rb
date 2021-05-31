@@ -20,6 +20,8 @@ class SeshionsController < ApplicationController
   end
 
   def show
+    @notes = @seshion.notes.all
+    @note = Note.new(commentable_id: @seshion.id, user_id: helpers.current_user.id)
   end
 
   def edit
