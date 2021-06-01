@@ -25,6 +25,7 @@ class CharactersController < ApplicationController
     end
 
     def edit
+        redirect_if_not_allowed_to_edit
     end
 
     def update
@@ -48,6 +49,12 @@ class CharactersController < ApplicationController
     def redirect_if_not_allowed_to_join
         if helpers.current_user == @campaign.gm || @campaign.players.include?(helpers.current_user) || !helpers.current_user
             redirect_to campaign_path(@campaign)
+        end
+    end
+
+    def redirect_if_not_allowed_to_edit
+        if helpers.current_user != @character.player
+            redirect_to campaign_character_path(@campaign, @character)
         end
     end
 

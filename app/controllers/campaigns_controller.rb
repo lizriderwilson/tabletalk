@@ -21,7 +21,9 @@ class CampaignsController < ApplicationController
 
   def show
     @notes = @campaign.notes.all
-    @note = Note.new(commentable_id: @campaign.id, user_id: helpers.current_user.id)
+    if helpers.current_user
+      @note = Note.new(commentable_id: @campaign.id, user_id: helpers.current_user.id)
+    end
   end
 
   def edit
