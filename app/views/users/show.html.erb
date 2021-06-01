@@ -3,7 +3,7 @@
     <div class="w-2/3">
         <div class="bg-primary-100 flex flex-col px-8 pb-4" id="games">
             <div class="py-8 flex justify-between items-center">
-                <h2 class="header">Your Recent Games</h2>
+                <h2 class="header"><%= display_user_name %> Recent Games</h2>
                 <div>
                     <%= link_to "Join", campaigns_path, class: "btn" %>
                     <%= link_to "Create", new_user_campaign_path(@user), class: "btn" %>
@@ -29,7 +29,7 @@
         
         <div class="bg-primary-100 flex flex-col px-8 pb-4" id="characters">
             <div class="py-8 flex justify-between items-center">
-                <h2 class="header">Your Characters</h2>
+                <h2 class="header"><%= display_user_name %> Characters</h2>
             </div>
             <div class="grid grid-cols-3 gap-2 mb-4">
                 <% @characters.each do |ch| %>
