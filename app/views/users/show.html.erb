@@ -4,10 +4,12 @@
         <div class="bg-primary-100 flex flex-col px-8 pb-4" id="games">
             <div class="py-8 flex justify-between items-center">
                 <h2 class="header"><%= display_user_name %> Recent Games</h2>
-                <div>
-                    <%= link_to "Join", campaigns_path, class: "btn" %>
-                    <%= link_to "Create", new_user_campaign_path(@user), class: "btn" %>
-                </div>
+                <% if @user == current_user %>
+                    <div>
+                        <%= link_to "Join", campaigns_path, class: "btn" %>
+                        <%= link_to "Create", new_user_campaign_path(@user), class: "btn" %>
+                    </div>
+                <% end %>
             </div>
             <div class="grid grid-cols-3 gap-2 mb-4">
                 <% @campaigns.each do |c| %>
