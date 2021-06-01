@@ -20,6 +20,8 @@ class CampaignsController < ApplicationController
   end
 
   def show
+    @notes = @campaign.notes.all
+    @note = Note.new(commentable_id: @campaign.id, user_id: helpers.current_user.id)
   end
 
   def edit

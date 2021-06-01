@@ -3,6 +3,7 @@ class Campaign < ApplicationRecord
     has_many :characters
     has_many :players, through: :characters, class_name: 'User'
     has_many :seshions
+    has_many :notes, as: :commentable
 
     #Class methods
     def self.public

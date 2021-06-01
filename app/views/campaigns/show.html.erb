@@ -15,6 +15,17 @@
                 <p class="btn">GM: <%= @campaign.gm.username %></p>
             </div>
         </div>
+        <div class="bg-primary-100 flex flex-col px-8 pb-4" id="description">
+            <div class="py-8 flex flex-col">
+                <h2 class="header mb-2">Campaign Notes</h2>
+                <div class="py-2">
+                    <%= render partial: 'notes/form', locals: {commentable: @campaign, path: campaign_notes_path(@campaign, @note)} %>
+                </div>
+                <% @notes.each do |note| %>
+                    <div><%= note.content %> <%= link_to "Edit", edit_note_path(note) %></div>
+                <% end %>
+            </div>
+        </div>
     </div>
 
     <div class="bg-primary-200 h-screen w-1/3">
