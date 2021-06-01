@@ -19,10 +19,10 @@
             <div class="py-8 flex flex-col">
                 <h2 class="header mb-2">Campaign Notes</h2>
                 <div class="py-2">
-                    <%= render partial: 'notes/form', locals: {commentable: @campaign, path: campaign_notes_path(@campaign, @note)} %>
+                    <%= display_note_form_if_campaign_includes_current_user(@campaign, campaign_notes_path(@campaign, @note)) %>
                 </div>
                 <% @notes.each do |note| %>
-                    <div><%= note.content %> <%= link_to "Edit", edit_note_path(note) %></div>
+                    <div><%= note.content %> <%= display_edit_link_if_note_belongs_to_current_user(note) %></div>
                 <% end %>
             </div>
         </div>
