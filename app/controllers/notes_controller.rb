@@ -1,13 +1,6 @@
 class NotesController < ApplicationController
   before_action :find_note, only: [:edit, :update, :destroy]
 
-  # def create
-  #   @note = @commentable.notes.new(note_params)
-  #   @note.user = helpers.current_user
-  #   @note.save
-  #   # redirect_to @commentable
-  # end
-
   def edit
   end
 
