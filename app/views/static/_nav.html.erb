@@ -18,7 +18,7 @@
         <div class="bg-primary-700 sm:bg-primary-800 px-4 py-3 pb-4 text-right sm:flex sm:items-center">
             <%= link_to "Campaigns", campaigns_path, class: "block sm:inline-block sm:px-2 rounded py-0.5 text-secondary-200 hover:bg-primary-900" %>
             <%= link_to "Players", users_path, class: "block sm:inline-block sm:px-2 rounded py-0.5 text-secondary-200 hover:bg-primary-900" %>
-            <%= link_to current_user.username, user_path(current_user) if current_user %>
+            <%= login_signup_or_user_link %>
         </div>
     </div>
 

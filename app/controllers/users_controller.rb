@@ -4,7 +4,6 @@ class UsersController < ApplicationController
     end
 
     def new
-    raise params.inspect
         @user = User.new
     end
 
