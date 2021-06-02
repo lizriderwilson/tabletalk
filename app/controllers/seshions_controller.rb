@@ -17,7 +17,7 @@ class SeshionsController < ApplicationController
   def create
     @seshion = Seshion.new(seshion_params)
     @seshion.save
-    redirect_to campaign_path(@campaign)
+    redirect_to campaign_seshions_path(@campaign)
   end
 
   def show
@@ -37,6 +37,8 @@ class SeshionsController < ApplicationController
   end
 
   def destroy
+    @seshion.destroy
+    redirect_to campaign_path(@campaign)
   end
 
   private

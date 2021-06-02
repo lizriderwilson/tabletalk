@@ -8,7 +8,7 @@ module NotesHelper
     
     def display_edit_link_if_note_belongs_to_current_user(note)
         if note.user == current_user
-            link_to("Edit", edit_note_path(note)) + link_to("Delete", note_path(note), method: :delete)
+            link_to("Edit", edit_note_path(note)) + delete_asset("Delete", note_path(note), "Are you sure?")
         end
     end
 
