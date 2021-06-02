@@ -10,7 +10,11 @@ class CampaignsController < ApplicationController
   end
 
   def new
-    @campaign = Campaign.new(gm_id: params[:user_id])
+    if helpers.current_user
+      @campaign = Campaign.new(gm_id: session[:user_id])
+    else
+      redirect_to campaigns_path
+    end
   end
 
   def create
