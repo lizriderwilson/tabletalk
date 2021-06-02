@@ -10,7 +10,11 @@ class CampaignsController < ApplicationController
   end
 
   def new
-    @campaign = Campaign.new(gm_id: params[:user_id])
+    if helpers.current_user
+      @campaign = Campaign.new(gm_id: session[:user_id])
+    else
+      redirect_to campaigns_path
+    end
   end
 
   def create
@@ -21,10 +25,13 @@ class CampaignsController < ApplicationController
 
   def show
     @notes = @campaign.notes.all
-    @note = Note.new(commentable_id: @campaign.id, user_id: helpers.current_user.id)
+    if helpers.current_user
+      @note = Note.new(commentable_id: @campaign.id, user_id: helpers.current_user.id)
+    end
   end
 
   def edit
+    redirect_if_not_gm(campaign_path(@campaign))
   end
 
   def update

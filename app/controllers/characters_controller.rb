@@ -1,5 +1,6 @@
 class CharactersController < ApplicationController
     before_action :find_character, only: [:show, :edit, :update, :destroy]
+    before_action :find_campaign, only: [:new, :create, :show, :edit, :update]
 
     def index
         @characters = Character.all
@@ -7,14 +8,14 @@ class CharactersController < ApplicationController
 
     def new
         @character = Character.new(campaign_id: params[:campaign_id])
-        redirect_if_user_is_gm_or_already_joined
+        redirect_if_not_allowed_to_join
     end
 
     def create
         @character = Character.new(character_params)
         byebug
         if @character.save
-            redirect_to campaign_character_path(@character.campaign, @character)
+            redirect_to campaign_character_path(@campaign, @character)
         else
             render :new
         end
@@ -24,11 +25,12 @@ class CharactersController < ApplicationController
     end
 
     def edit
+        redirect_if_not_allowed_to_edit
     end
 
     def update
         @character.update(character_params)
-        redirect_to campaign_character_path(@character.campaign, @character)
+        redirect_to campaign_character_path(@campaign, @character)
     end
 
     def destroy
@@ -40,10 +42,19 @@ class CharactersController < ApplicationController
         @character = Character.find_by(id: params[:id])
     end
 
-    def redirect_if_user_is_gm_or_already_joined
-        campaign = Campaign.find_by(id: params[:campaign_id])
-        if helpers.current_user == campaign.gm || campaign.players.include?(helpers.current_user)
-            redirect_to campaign_path(Campaign.find_by(id: params[:campaign_id]))
+    def find_campaign
+        @campaign = Campaign.find_by(id: params[:campaign_id])
+    end
+
+    def redirect_if_not_allowed_to_join
+        if helpers.current_user == @campaign.gm || @campaign.players.include?(helpers.current_user) || !helpers.current_user
+            redirect_to campaign_path(@campaign)
+        end
+    end
+
+    def redirect_if_not_allowed_to_edit
+        if helpers.current_user != @character.player
+            redirect_to campaign_character_path(@campaign, @character)
         end
     end
 

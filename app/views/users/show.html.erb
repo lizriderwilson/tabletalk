@@ -3,11 +3,13 @@
     <div class="w-2/3">
         <div class="bg-primary-100 flex flex-col px-8 pb-4" id="games">
             <div class="py-8 flex justify-between items-center">
-                <h2 class="header">Your Recent Games</h2>
-                <div>
-                    <%= link_to "Join", campaigns_path, class: "btn" %>
-                    <%= link_to "Create", new_user_campaign_path(@user), class: "btn" %>
-                </div>
+                <h2 class="header"><%= display_user_name %> Recent Games</h2>
+                <% if @user == current_user %>
+                    <div>
+                        <%= link_to "Join", campaigns_path, class: "btn" %>
+                        <%= link_to "Create", new_user_campaign_path(@user), class: "btn" %>
+                    </div>
+                <% end %>
             </div>
             <div class="grid grid-cols-3 gap-2 mb-4">
                 <% @campaigns.each do |c| %>
@@ -29,7 +31,7 @@
         
         <div class="bg-primary-100 flex flex-col px-8 pb-4" id="characters">
             <div class="py-8 flex justify-between items-center">
-                <h2 class="header">Your Characters</h2>
+                <h2 class="header"><%= display_user_name %> Characters</h2>
             </div>
             <div class="grid grid-cols-3 gap-2 mb-4">
                 <% @characters.each do |ch| %>
@@ -53,16 +55,18 @@
             <%= @user.email %>
             <%= link_to "Log Out", logout_path, method:'delete' %>
         </div>
-        <div class="px-6 py-4" id="sessions">
-            <h3 class="text-2xl font-semibold">Your Sessions</h3>
-            <%= month_calendar(events: @user.seshions) do |date, seshions| %>
-                <%= date.day %>
-                <% seshions.each do |seshion| %>
-                    <div>
-                        <%= seshion.campaign.name %>
-                    </div>
+        <% if @user == current_user %>
+            <div class="px-6 py-4" id="sessions">
+                <h3 class="text-2xl font-semibold">Your Sessions</h3>
+                <%= month_calendar(events: @user.seshions) do |date, seshions| %>
+                    <%= date.day %>
+                    <% seshions.each do |seshion| %>
+                        <div>
+                            <%= seshion.campaign.name %>
+                        </div>
+                    <% end %>
                 <% end %>
-            <% end %>
-        </div>
+            </div>
+        <% end %>
     </div>
 </div>
