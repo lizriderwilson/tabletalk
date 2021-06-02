@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
   before_action :find_note, only: [:edit, :update, :destroy]
+  before_action :find_commentable, only: [:edit, :update, :destroy]
 
   def edit
     if @note.user != helpers.current_user || !helpers.current_user
@@ -13,6 +14,8 @@ class NotesController < ApplicationController
   end
 
   def destroy
+    @note.destroy
+    redirect_based_on_commentable_type
   end
 
   private
@@ -21,15 +24,19 @@ class NotesController < ApplicationController
     @note = Note.find_by(id: params[:id])
   end
 
+  def find_commentable
+    @commentable = @note.commentable
+  end
+
   def note_params
     params.require(:note).permit(:content)
   end
 
   def redirect_based_on_commentable_type
     if @note.commentable_type == "Campaign"
-      redirect_to campaign_path(@note.commentable)
+      redirect_to campaign_path(@commentable)
     elsif @note.commentable_type == "Seshion"
-      redirect_to campaign_seshion_path(@note.commentable.campaign, @note.commentable)
+      redirect_to campaign_seshion_path(@commentable.campaign, @commentable)
     end
   end
 
