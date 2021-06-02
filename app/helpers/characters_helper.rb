@@ -6,4 +6,10 @@ module CharactersHelper
         end.first
     end
 
+    def edit_btn_if_character_player
+        if @character.player == current_user
+            link_to "Edit Character", edit_campaign_character_path(@campaign, @character), class: "btn"
+        end
+    end
+
 end

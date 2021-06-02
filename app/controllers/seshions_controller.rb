@@ -11,20 +11,24 @@ class SeshionsController < ApplicationController
 
   def new
     @seshion = Seshion.new(campaign_id: params[:campaign_id])
+    redirect_if_not_gm(campaign_seshions_path(@campaign))
   end
 
   def create
     @seshion = Seshion.new(seshion_params)
     @seshion.save
-    redirect_to campaign_path(@seshion.campaign)
+    redirect_to campaign_path(@campaign)
   end
 
   def show
     @notes = @seshion.notes.all
-    @note = Note.new(commentable_id: @seshion.id, user_id: helpers.current_user.id)
+    if helpers.current_user
+      @note = Note.new(commentable_id: @seshion.id, user_id: helpers.current_user.id)
+    end
   end
 
   def edit
+    redirect_if_not_gm(campaign_seshion_path(@campaign, @seshion))
   end
 
   def update
@@ -43,6 +47,12 @@ class SeshionsController < ApplicationController
   
   def find_seshion
     @seshion = Seshion.find_by(id: params[:id])
+  end
+
+  def redirect_if_not_gm(path)
+    if helpers.current_user != @campaign.gm
+      redirect_to path
+    end
   end
 
   def seshion_params
