@@ -5,6 +5,8 @@ module CampaignsHelper
             link_to "Edit", edit_user_campaign_path(@campaign), class: "btn"
         elsif current_user && !current_user.campaigns.include?(@campaign)
             link_to "Join", new_campaign_character_path(@campaign), class: "btn"
+        elsif current_user && current_user.campaigns.include?(@campaign)
+            link_to "Leave Campaign", campaign_character_path(@campaign, character(current_user)), class: "btn", method: :delete, data: { confirm: "Are you sure? Your character will be deleted!" }
         end
     end
     
