@@ -31,6 +31,7 @@ class CampaignsController < ApplicationController
   end
 
   def edit
+    redirect_if_not_gm(campaign_path(@campaign))
   end
 
   def update

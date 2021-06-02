@@ -49,12 +49,6 @@ class SeshionsController < ApplicationController
     @seshion = Seshion.find_by(id: params[:id])
   end
 
-  def redirect_if_not_gm(path)
-    if helpers.current_user != @campaign.gm
-      redirect_to path
-    end
-  end
-
   def seshion_params
     params.require(:seshion).permit(:start_time, :campaign_id)
   end
