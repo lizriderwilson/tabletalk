@@ -40,6 +40,8 @@ class CampaignsController < ApplicationController
   end
 
   def destroy
+    @campaign.destroy
+    redirect_to user_path(helpers.current_user)
   end
 
   private
