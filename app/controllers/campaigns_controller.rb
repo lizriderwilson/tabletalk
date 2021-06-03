@@ -11,9 +11,15 @@ class CampaignsController < ApplicationController
 
   def new
     if helpers.current_user
-      @campaign = Campaign.new(gm_id: session[:user_id])
+      if params[:user_id] && !User.find_by(id: params[:user_id])
+        redirect_to campaigns_path, alert: "User not found"
+      elsif params[:user_id] && User.find_by(id: params[:user_id]) != helpers.current_user
+        redirect_to new_user_campaign_path(helpers.current_user)
+      else
+        @campaign = Campaign.new(gm_id: session[:user_id])
+      end
     else
-      redirect_to campaigns_path
+      redirect_to campaigns_path, alert: "You must be signed in to make a new campaign."
     end
   end
 
@@ -38,10 +44,11 @@ class CampaignsController < ApplicationController
       else
         @campaign = gm.campaigns_as_gm.find_by(id: params[:id])
         redirect_to user_campaigns_path(gm), alert: "Campaign not found" if @campaign.nil?
+        redirect_if_not_gm(campaign_path(@campaign), "You can't edit a campaign that you don't GM")
       end
     else
       find_campaign
-      redirect_if_not_gm(campaign_path(@campaign))
+      redirect_if_not_gm(campaign_path(@campaign), "You can't edit a campaign that you don't GM")
     end
   end
 

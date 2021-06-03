@@ -11,7 +11,7 @@ class SeshionsController < ApplicationController
 
   def new
     @seshion = Seshion.new(campaign_id: params[:campaign_id])
-    redirect_if_not_gm(campaign_seshions_path(@campaign))
+    redirect_if_not_gm(campaign_seshions_path(@campaign), "You can't create a new session if you're not the GM")
   end
 
   def create
@@ -28,7 +28,7 @@ class SeshionsController < ApplicationController
   end
 
   def edit
-    redirect_if_not_gm(campaign_seshion_path(@campaign, @seshion))
+    redirect_if_not_gm(campaign_seshion_path(@campaign, @seshion), "You can't edit a session if you're not the GM")
   end
 
   def update
