@@ -1,5 +1,5 @@
 class CharactersController < ApplicationController
-    before_action :find_character, only: [:show, :edit, :update, :destroy]
+    before_action :find_character, only: [:show, :update, :destroy]
     before_action :find_campaign, only: [:new, :create, :show, :edit, :update, :destroy]
 
     def index
@@ -7,8 +7,12 @@ class CharactersController < ApplicationController
     end
 
     def new
-        @character = Character.new(campaign_id: params[:campaign_id])
-        redirect_if_not_allowed_to_join
+        if !@campaign
+            redirect_to campaigns_path, alert: "Campaign not found."
+        else
+            @character = Character.new(campaign_id: params[:campaign_id], player_id: helpers.current_user)
+            redirect_if_not_allowed_to_join
+        end
     end
 
     def create
@@ -24,7 +28,16 @@ class CharactersController < ApplicationController
     end
 
     def edit
-        redirect_if_not_allowed_to_edit
+        if !@campaign
+            redirect_to campaigns_path, alert: "Campaign not found."
+        else
+            @character = @campaign.characters.find_by(id: params[:id])
+            if !@character
+                redirect_to campaign_path(@campaign), alert: "Character not found in this campaign."
+            else
+                redirect_if_not_allowed_to_edit
+            end
+        end
     end
 
     def update
@@ -49,7 +62,7 @@ class CharactersController < ApplicationController
 
     def redirect_if_not_allowed_to_join
         if helpers.current_user == @campaign.gm || @campaign.players.include?(helpers.current_user) || !helpers.current_user
-            redirect_to campaign_path(@campaign)
+            redirect_to campaign_path(@campaign), alert: "You cannot join this campaign! You are either the gm, already a player, or not logged in."
         end
     end
 
