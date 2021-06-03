@@ -4,6 +4,12 @@
 
     <h1 class="text-3xl font-bold text-center mb-4">Edit Profile</h1>
 
-    <%= render 'form' %>
+    <%= form_for @user do |f| %>
+        <%= f.label :bio %>
+        <%= f.text_area :bio %>
+        <%= f.label :favorite_systems %>
+        <%= f.text_field :favorite_systems %>
+        <%= f.submit %>
+    <% end %>
 
 </div>
