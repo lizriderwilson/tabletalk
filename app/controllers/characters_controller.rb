@@ -1,6 +1,6 @@
 class CharactersController < ApplicationController
     before_action :find_character, only: [:show, :edit, :update, :destroy]
-    before_action :find_campaign, only: [:new, :create, :show, :edit, :update]
+    before_action :find_campaign, only: [:new, :create, :show, :edit, :update, :destroy]
 
     def index
         @characters = Character.all
@@ -13,7 +13,6 @@ class CharactersController < ApplicationController
 
     def create
         @character = Character.new(character_params)
-        byebug
         if @character.save
             redirect_to campaign_character_path(@campaign, @character)
         else
@@ -34,6 +33,8 @@ class CharactersController < ApplicationController
     end
 
     def destroy
+        @character.destroy
+        redirect_to campaign_path(@campaign)
     end
 
     private

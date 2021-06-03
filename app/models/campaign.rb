@@ -1,9 +1,9 @@
 class Campaign < ApplicationRecord
     belongs_to :gm, class_name: 'User'
-    has_many :characters
+    has_many :characters, dependent: :destroy
     has_many :players, through: :characters, class_name: 'User'
-    has_many :seshions
-    has_many :notes, as: :commentable
+    has_many :seshions, dependent: :destroy
+    has_many :notes, as: :commentable, dependent: :destroy
 
     #Class methods
     def self.public

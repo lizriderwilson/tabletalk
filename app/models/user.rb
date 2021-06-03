@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :campaigns_as_gm, class_name: 'Campaign', foreign_key: 'gm_id'
-  has_many :characters, foreign_key: 'player_id'
+  has_many :campaigns_as_gm, class_name: 'Campaign', foreign_key: 'gm_id', dependent: :destroy
+  has_many :characters, foreign_key: 'player_id', dependent: :destroy
   has_many :campaigns_as_player, through: :characters, source: :campaign
   has_many :notes
 

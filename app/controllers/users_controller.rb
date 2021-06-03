@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    before_action :find_user, only: [:show, :edit, :update]
 
     def index
     end
@@ -15,19 +16,23 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find_by(id: params[:id])
         @campaigns = @user.campaigns
         @characters = @user.characters
     end
 
     def edit
-        @user = User.find_by(id: params[:id])
     end
 
     def update
+        @user.update(user_params)
+        redirect_to user_path(@user)
     end
 
     private
+
+    def find_user
+        @user = User.find_by(id: params[:id])
+    end
 
     def user_params
         params.require(:user).permit(:email, :password, :password_confirmation, :username, :bio, :favorite_systems)

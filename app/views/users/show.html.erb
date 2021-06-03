@@ -38,7 +38,7 @@
                     <div class="bg-secondary-50">
                         <%= link_to ch.name, campaign_character_path(@user,ch) %>
                         <div>
-                            <%= link_to "View", campaign_character_path(@user,ch), class: "bg-secondary-200 p-2" %>
+                            <%= link_to "View", campaign_character_path(ch.campaign,ch), class: "bg-secondary-200 p-2" %>
                             <%= link_to "Edit", edit_campaign_character_path(ch.campaign, ch), class: "bg-secondary-200 p-2" if ch.player == current_user %>
                         </div>
                     </div>
@@ -51,22 +51,27 @@
     </div>
 
     <div class="bg-primary-200 h-screen w-1/3">
-        <div id="profile-card">
-            <%= @user.email %>
-            <%= link_to "Log Out", logout_path, method:'delete' %>
+        <div class="px-6 py-4 flex flex-col" id="profile-card">
+            <p><%= @user.username %></p>
+            <p><%= @user.bio %></p>
+            <p><%= @user.favorite_systems%></p>
+            <div class="">
+                <%= link_to "Edit Profile", edit_user_path(@user), class: "btn" %>
+                <%= link_to "Log Out", logout_path, method:'delete', class: "btn" %>
+            </div>
         </div>
         <% if @user == current_user %>
-            <div class="px-6 py-4" id="sessions">
-                <h3 class="text-2xl font-semibold">Your Sessions</h3>
-                <%= month_calendar(events: @user.seshions) do |date, seshions| %>
-                    <%= date.day %>
-                    <% seshions.each do |seshion| %>
-                        <div>
-                            <%= seshion.campaign.name %>
-                        </div>
-                    <% end %>
+        <div class="px-6 py-4" id="sessions">
+            <h3 class="text-2xl font-semibold">Your Sessions</h3>
+            <%= month_calendar(events: @user.seshions) do |date, seshions| %>
+                <%= date.day %>
+                <% seshions.each do |seshion| %>
+                    <div>
+                        <%= seshion.campaign.name %>
+                    </div>
                 <% end %>
-            </div>
+            <% end %>
+        </div>
         <% end %>
     </div>
 </div>

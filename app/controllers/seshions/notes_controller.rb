@@ -5,7 +5,7 @@ class Seshions::NotesController < NotesController
         @note = @commentable.notes.new(note_params)
         @note.user = helpers.current_user
         @note.save
-        redirect_to campaign_seshion_path(@commentable.campaign, @commentable)
+        redirect_based_on_commentable_type
     end
 
     private
