@@ -1,5 +1,5 @@
 class CampaignsController < ApplicationController
-  before_action :find_campaign, only: [:show, :edit, :update, :destroy]
+  before_action :find_campaign, only: [:show, :update, :destroy]
 
   def index
     if params[:user_id]
@@ -31,7 +31,18 @@ class CampaignsController < ApplicationController
   end
 
   def edit
-    redirect_if_not_gm(campaign_path(@campaign))
+    if params[:user_id]
+      gm = User.find_by(id: params[:user_id])
+      if gm.nil?
+        redirect_to campaigns_path, alert: "User not found"
+      else
+        @campaign = gm.campaigns_as_gm.find_by(id: params[:id])
+        redirect_to user_campaigns_path(gm), alert: "Campaign not found" if @campaign.nil?
+      end
+    else
+      find_campaign
+      redirect_if_not_gm(campaign_path(@campaign))
+    end
   end
 
   def update
