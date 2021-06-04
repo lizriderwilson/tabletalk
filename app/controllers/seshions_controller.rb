@@ -1,6 +1,6 @@
 class SeshionsController < ApplicationController
   before_action :find_campaign
-  before_action :find_seshion, only: [:show, :edit, :update, :destroy]
+  before_action :find_seshion, only: [:show, :update, :destroy]
 
   def index
     @seshions = @campaign.seshions
@@ -10,8 +10,12 @@ class SeshionsController < ApplicationController
   end
 
   def new
-    @seshion = Seshion.new(campaign_id: params[:campaign_id])
-    redirect_if_not_gm(campaign_seshions_path(@campaign))
+    if !@campaign
+      redirect_to campaigns_path, alert: "Campaign not found."
+    else
+      @seshion = Seshion.new(campaign_id: params[:campaign_id])
+      redirect_if_not_gm(campaign_seshions_path(@campaign), "You can't create a new session if you're not the GM")
+    end
   end
 
   def create
@@ -28,7 +32,16 @@ class SeshionsController < ApplicationController
   end
 
   def edit
-    redirect_if_not_gm(campaign_seshion_path(@campaign, @seshion))
+    if !@campaign
+      redirect_to campaigns_path, alert: "Campaign not found."
+    else
+      @seshion = @campaign.seshions.find_by(id: params[:id])
+      if !@seshion
+        redirect_to campaign_seshions_path(@campaign), alert: "Session not found in this campaign."
+      else
+        redirect_if_not_gm(campaign_seshion_path(@campaign, @seshion), "You can't edit a session if you're not the GM")
+      end
+    end
   end
 
   def update

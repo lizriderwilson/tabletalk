@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :characters, only: [:index]
   end
 
-  resources :campaigns, only: [:index, :new, :create, :show, :update] do
+  resources :campaigns, except: [:destroy] do
     resources :characters
     resources :notes, module: :campaigns
     resources :seshions, path: 'sessions' do #Campaign_sessions renamed 'seshions' to not conflict with Sessions Controller, path and helper names overridden for clarity

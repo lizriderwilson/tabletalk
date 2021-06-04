@@ -1,11 +1,16 @@
 class NotesController < ApplicationController
   before_action :find_note, only: [:edit, :update, :destroy]
-  before_action :find_commentable, only: [:edit, :update, :destroy]
+  before_action :find_commentable, only: [:update, :destroy]
 
   def edit
-    if @note.user != helpers.current_user || !helpers.current_user
-      redirect_based_on_commentable_type
-    end 
+    if !@note
+      redirect_to campaigns_path, alert: "Note not found"
+    else
+      find_commentable
+      if @note.user != helpers.current_user || !helpers.current_user
+        redirect_based_on_commentable_type
+      end
+    end
   end
 
   def update
