@@ -27,8 +27,11 @@ class CampaignsController < ApplicationController
 
   def create
     @campaign = Campaign.new(campaign_params)
-    @campaign.save
-    redirect_to campaign_path(@campaign)
+    if @campaign.save
+      redirect_to campaign_path(@campaign)
+    else
+      render :new
+    end
   end
 
   def show
@@ -55,8 +58,11 @@ class CampaignsController < ApplicationController
   end
 
   def update
-    @campaign.update(campaign_params)
-    redirect_to campaign_path(@campaign)
+    if @campaign.update(campaign_params)
+      redirect_to campaign_path(@campaign)
+    else
+      render :edit
+    end
   end
 
   def destroy

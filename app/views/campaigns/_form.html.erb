@@ -1,8 +1,14 @@
+<% if @campaign.errors %>
+    <% @campaign.errors.each do |error| %>
+        <p class="text-center my-1"><%= error.full_message %></p>
+    <% end %>
+<% end %>
+
 <%= form_for @campaign do |f| %>
     <%= f.hidden_field :gm_id %>
     <div class="flex flex-col items-center">
         <div class="mb-3">
-            <%= f.label :name, class: "" %></br>
+            <%= f.label "Name", for: "campaign_name", class: "" %></br>
             <%= f.text_field :name, class: "session-text-field" %>
         </div>
         <div class="mb-3">
@@ -10,7 +16,7 @@
             <%= f.text_area :description, class: "session-text-field" %>
         </div>
         <div class="mb-3">
-            <%= f.label :game_system, class: "" %></br>
+            <%= f.label "Game System", for: "campaign_game_system", class: "" %></br>
             <%= f.text_field :game_system, class: "session-text-field" %>
         </div>
         <div class="mb-3">
