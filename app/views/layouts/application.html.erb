@@ -13,6 +13,15 @@
 
   <body>
     <%= render 'static/nav' %>
+
+    	<% if notice %>
+      	<%= notice %>
+	    <% end %>
+      
+      <% if alert %>
+        <%= alert %>
+      <% end %>
+
     <%= yield %>
   </body>
 </html>
