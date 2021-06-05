@@ -43,4 +43,8 @@ td {
     @apply h-16 bg-secondary-50
 }
 
+div.field_with_errors input {
+    @apply ring-2 ring-error-400
+}
+
 @import "tailwindcss/utilities";
