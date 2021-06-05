@@ -7,7 +7,7 @@ class CampaignsController < ApplicationController
       @campaigns = @user.campaigns
       render 'index_for_user'
     else
-      @campaigns = Campaign.public
+      @campaigns = Campaign.public_games
     end
   end
 

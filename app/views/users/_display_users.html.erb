@@ -1,0 +1,9 @@
+<div class="grid grid-cols-4 gap-2">
+    <% @users.each do |user| %>
+    <div class="bg-secondary-100 h-60 p-4">
+        <%= link_to user.username, user_path(user), class: "text-2xl font-semibold" %>
+        <p>Favorite Systems: <%= user.favorite_systems %></p>
+        <p>Next session: 7/1/2021</p>
+    </div>
+    <% end %>
+</div>

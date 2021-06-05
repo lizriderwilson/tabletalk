@@ -10,6 +10,7 @@
         <div class="bg-secondary-100 h-60 p-4">
             <%= link_to c.name, campaign_path(c), class: "text-2xl font-semibold" %>
             <p><%= c.game_system %></p>
+            <p><%= display_number_of_players(c) %></p>
             <p>Next session: 7/1/2021</p>
         </div>
         <% end %>

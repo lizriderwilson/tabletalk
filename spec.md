@@ -15,7 +15,7 @@ Specs:
 - [x] Include third party signup/login (how e.g. Devise/OmniAuth)
 - [x] Include nested resource show or index (campaigns/:id/seshions)
 - [x] Include nested resource "new" form (campaigns/:id/seshions/new)
-- [ ] Include form display of validation errors (form URL e.g. /recipes/new)
+- [x] Include form display of validation errors (form URL e.g. /recipes/new)
 
 Confirm:
 - [ ] The application is pretty DRY

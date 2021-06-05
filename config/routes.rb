@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create_by_omniauth'
 
   resources :users do
+    collection do
+      get 'gms'
+      get 'players'
+    end
     resources :campaigns, only: [:index, :new, :create, :edit, :destroy]
     resources :characters, only: [:index]
   end

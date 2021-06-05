@@ -2,6 +2,15 @@ class UsersController < ApplicationController
     before_action :find_user, only: [:show, :edit, :update]
 
     def index
+        @users = User.all
+    end
+
+    def gms
+        @users = User.gms
+    end
+
+    def players
+        @users = User.players
     end
 
     def new
