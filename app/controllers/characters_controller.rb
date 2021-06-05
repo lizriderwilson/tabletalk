@@ -3,7 +3,8 @@ class CharactersController < ApplicationController
     before_action :find_campaign, only: [:new, :create, :show, :edit, :update, :destroy]
 
     def index
-        @characters = Character.all
+        @user = User.find_by(id: params[:user_id])
+        @characters = @user.characters
     end
 
     def new

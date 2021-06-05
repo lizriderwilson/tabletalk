@@ -6,15 +6,12 @@
     </div>
 
     <div class="grid grid-cols-4 gap-2">
-        <% @characters.each do |ch| %>
+        <% @characters.each do |character| %>
         <div class="bg-secondary-100 h-60 p-4">
-            <%= link_to ch.name, campaign_character_path(ch.campaign, ch), class: "text-2xl font-semibold" %>
-            <p><%= ch.player.username %></p>
+            <%= link_to character.name, campaign_character_path(character.campaign, character), class: "text-2xl font-semibold" %>
+            <p><%= character.player.username %></p>
         </div>
         <% end %>
-        <div class="h-60 bg-secondary-100"></div>
-        <div class="h-60 bg-secondary-100"></div>
-        <div class="h-60 bg-secondary-100"></div>
     </div>
 
 </div>

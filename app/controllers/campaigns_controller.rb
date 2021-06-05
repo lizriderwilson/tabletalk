@@ -3,7 +3,9 @@ class CampaignsController < ApplicationController
 
   def index
     if params[:user_id]
-      @campaigns = User.find_by(id: params[:user_id]).campaigns
+      @user = User.find_by(id: params[:user_id])
+      @campaigns = @user.campaigns
+      render 'index_for_user'
     else
       @campaigns = Campaign.public
     end
