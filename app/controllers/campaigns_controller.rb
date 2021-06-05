@@ -3,9 +3,11 @@ class CampaignsController < ApplicationController
 
   def index
     if params[:user_id]
-      @campaigns = User.find_by(id: params[:user_id]).campaigns
+      @user = User.find_by(id: params[:user_id])
+      @campaigns = @user.campaigns
+      render 'index_for_user'
     else
-      @campaigns = Campaign.public
+      @campaigns = Campaign.public_games
     end
   end
 
@@ -25,8 +27,11 @@ class CampaignsController < ApplicationController
 
   def create
     @campaign = Campaign.new(campaign_params)
-    @campaign.save
-    redirect_to campaign_path(@campaign)
+    if @campaign.save
+      redirect_to campaign_path(@campaign)
+    else
+      render :new
+    end
   end
 
   def show
@@ -53,8 +58,11 @@ class CampaignsController < ApplicationController
   end
 
   def update
-    @campaign.update(campaign_params)
-    redirect_to campaign_path(@campaign)
+    if @campaign.update(campaign_params)
+      redirect_to campaign_path(@campaign)
+    else
+      render :edit
+    end
   end
 
   def destroy

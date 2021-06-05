@@ -1,8 +1,8 @@
 <div class="container mx-auto mt-12 my-4 flex flex-col" id="header">
 
     <div class="mb-8">
-        <h1 class="header mb-1">Public Campaigns</h1>
-        <p>These campaigns are public and accepting new players! Feel free to browse this list to find a game you'd like to join.</p>
+        <h1 class="header mb-1"><%= @user.username %>'s Campaigns</h1>
+        <p>These are all the campaigns that <%= @user.username%> belongs to.</p>
     </div>
 
     <div class="grid grid-cols-4 gap-2">
@@ -10,7 +10,6 @@
         <div class="bg-secondary-100 h-60 p-4">
             <%= link_to c.name, campaign_path(c), class: "text-2xl font-semibold" %>
             <p><%= c.game_system %></p>
-            <p><%= display_number_of_players(c) %></p>
             <p>Next session: 7/1/2021</p>
         </div>
         <% end %>

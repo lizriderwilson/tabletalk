@@ -9,6 +9,10 @@ module CampaignsHelper
             delete_asset("Leave Campaign", campaign_character_path(@campaign, character(current_user)), "Are you sure? Your character will be deleted!")
         end
     end
+
+    def display_number_of_players(campaign)
+        campaign.players.count == 1 ? "#{campaign.players.count} player" : "#{campaign.players.count} players"
+    end
     
 end
 

@@ -8,10 +8,13 @@ class Campaign < ApplicationRecord
     validates :name, presence: true
     validates :game_system, presence: true
 
+    scope :public_games, -> { where(is_public: true) }
+
     #Class methods
-    def self.public
-        where(is_public: true)
-    end
+
+    # def self.sort_by_player_count
+    #     Campaign
+    # end
 
     #Instance methods
     def visibility
@@ -24,6 +27,9 @@ class Campaign < ApplicationRecord
 
     def upcoming_seshions
         self.seshions.where('start_time >= ?', Time.current)
+    end
+
+    def next_seshion
     end
 
 end

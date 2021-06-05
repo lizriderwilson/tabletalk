@@ -3,7 +3,8 @@ class CharactersController < ApplicationController
     before_action :find_campaign, only: [:new, :create, :show, :edit, :update, :destroy]
 
     def index
-        @characters = Character.all
+        @user = User.find_by(id: params[:user_id])
+        @characters = @user.characters
     end
 
     def new
@@ -41,8 +42,11 @@ class CharactersController < ApplicationController
     end
 
     def update
-        @character.update(character_params)
-        redirect_to campaign_character_path(@campaign, @character)
+        if @character.update(character_params)
+            redirect_to campaign_character_path(@campaign, @character)
+        else
+            render :edit
+        end
     end
 
     def destroy
