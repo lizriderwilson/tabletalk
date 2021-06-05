@@ -1,3 +1,9 @@
+<% if @character.errors %>
+    <% @character.errors.each do |error| %>
+        <p class="text-center my-1"><%= error.full_message %></p>
+    <% end %>
+<% end %>
+
 <%= form_for [@campaign, @character] do |f| %>
     <%= f.hidden_field :player_id, value: current_user.id %>
     <%= f.hidden_field :campaign_id %>
@@ -6,7 +12,7 @@
             <label for="character_player_id"><%= current_user.username %></label>
         </div>
         <div class="mb-3">
-            <%= f.label :name, class: "" %></br>
+            <%= f.label "Name", for: "character_name", class: "" %></br>
             <%= f.text_field :name, class: "session-text-field" %>
         </div>
         <div class="mb-3">

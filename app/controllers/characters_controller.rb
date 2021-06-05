@@ -42,8 +42,11 @@ class CharactersController < ApplicationController
     end
 
     def update
-        @character.update(character_params)
-        redirect_to campaign_character_path(@campaign, @character)
+        if @character.update(character_params)
+            redirect_to campaign_character_path(@campaign, @character)
+        else
+            render :edit
+        end
     end
 
     def destroy
