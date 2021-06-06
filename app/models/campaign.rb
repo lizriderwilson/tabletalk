@@ -30,6 +30,11 @@ class Campaign < ApplicationRecord
     end
 
     def next_seshion
+        if self.seshions.empty?
+            "NA"
+        else
+            self.seshions.order('start_time DESC').first.start_time.to_formatted_s(:month_day_comma_year_time)
+        end
     end
 
 end

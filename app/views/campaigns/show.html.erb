@@ -1,49 +1,57 @@
 <div class="container mx-auto mt-4 flex">
 
     <div class="w-2/3">
-        <div class="bg-primary-100 flex flex-col px-8 pb-4" id="description">
-            <div class="py-8 flex justify-between items-center">
+        <div class="flex flex-col px-8 pb-10" id="description">
+            <div class="pt-8 flex justify-between items-center">
                 <h2 class="header mb-2"><%= @campaign.name %></h2>
-                <%= edit_or_join_campaign %>
-
+                <div><%= edit_or_join_campaign %></div>
             </div>
-                <p><%= @campaign.description %></p>
-            <div class="grid grid-cols-3 gap-2 mb-4">
-                <p><%= @campaign.visibility %> Campaign</p>
+            <div class="mb-4">
+                <p class="text-lg font-semibold">GM: <%= @campaign.gm.username %></p>
+                <p class="text-sm"><%= @campaign.visibility %> Campaign</p>
             </div>
-            <div class="flex justify-end">
-                <p class="btn">GM: <%= @campaign.gm.username %></p>
-            </div>
+            <p><%= @campaign.description %></p>
         </div>
-        <div class="bg-primary-100 flex flex-col px-8 pb-4" id="description">
-            <div class="py-8 flex flex-col">
-                <h2 class="header mb-2">Campaign Notes</h2>
+        <div class="flex flex-col px-8 py-4" id="description">
+            <div class="py-4 flex flex-col">
+                <h2 class="header mb-3">Campaign Notes</h2>
                 <div class="py-2">
                     <%= display_note_form_if_campaign_includes_current_user(@campaign, campaign_notes_path(@campaign, @note)) %>
                 </div>
                 <% @notes.each do |note| %>
-                    <div><%= note.content %> <%= display_edit_link_if_note_belongs_to_current_user(note) %></div>
+                    <div class="bg-primary-100 my-1 p-2 flex justify-between rounded-md">
+                        <div class="flex">
+                            <div class="bg-white h-20 w-20 flex flex-col items-center justify-around rounded-sm">
+                                <%= link_to note.user.username, user_path(note.user) %>
+                                <p class="text-sm"><%= note.created_at.to_formatted_s(:month_day) %></p>
+                            </div>
+                            <p class="ml-4 mt-1"><%= note.content %></p>
+                        </div>
+                        <div class="flex flex-col justify-between text-center text-sm">
+                            <%= display_edit_link_if_note_belongs_to_current_user(note) %>
+                        </div>
+                    </div>
                 <% end %>
             </div>
         </div>
     </div>
 
-    <div class="bg-primary-200 h-screen w-1/3">
+    <div class="bg-primary-100 h-full w-1/3">
         <div class="px-6 py-4" id="players">
-            <h3 class="text-2xl font-semibold">Players</h3>
+            <h3 class="text-2xl font-semibold mb-1">Players</h3>
             <% @campaign.players.each do |player| %>
                 <p><%= link_to player.username, user_path(player) %> (<%= link_to character(player).name, campaign_character_path(@campaign, character(player)) %>)</p>
             <% end %>
         </div>
         <div class="px-6 py-4" id="upcoming-sessions">
-            <h3 class="text-2xl font-semibold">Upcoming Sessions</h3>
-            <div>
+            <h3 class="text-2xl font-semibold mb-1">Upcoming Sessions</h3>
+            <div class="mb-4">
                 <% @campaign.upcoming_seshions.oldest_to_newest.each do |seshion| %>
                     <div><%= seshion.start_time.to_formatted_s(:month_day_comma_year_time) %></div>
                 <% end %>
             </div>
-            <%= link_to "View All Sessions", campaign_seshions_path(@campaign), class: "inline-block w-full mt-4 py-2 bg-primary-500 text-center" %>
-            <%= link_to "New Session", new_campaign_seshion_path(@campaign), class: "inline-block w-full mt-4 py-2 bg-primary-500 text-center" if @campaign.gm == current_user%>
+            <%= link_to "View All Sessions", campaign_seshions_path(@campaign), class: "inline-block w-full mt-4 py-2 bg-primary-500 text-center rounded-md text-white" %>
+            <%= link_to "New Session", new_campaign_seshion_path(@campaign), class: "inline-block w-full mt-4 py-2 bg-primary-500 text-center rounded-md text-white" if @campaign.gm == current_user%>
         </div>
     </div>
 
