@@ -1,12 +1,15 @@
 class NotesController < ApplicationController
   before_action :find_note, only: [:edit, :update, :destroy]
-  before_action :find_commentable, only: [:update, :destroy]
+
+  def create
+      @note = @commentable.notes.create(note_params)
+      redirect_based_on_commentable_type
+  end
 
   def edit
     if !@note
       redirect_to campaigns_path, alert: "Note not found"
     else
-      find_commentable
       if @note.user != helpers.current_user || !helpers.current_user
         redirect_based_on_commentable_type
       end
@@ -29,19 +32,15 @@ class NotesController < ApplicationController
     @note = Note.find_by(id: params[:id])
   end
 
-  def find_commentable
-    @commentable = @note.commentable
-  end
-
   def note_params
-    params.require(:note).permit(:content)
+    params.require(:note).permit(:content, :user_id)
   end
 
   def redirect_based_on_commentable_type
     if @note.commentable_type == "Campaign"
-      redirect_to campaign_path(@commentable)
+      redirect_to campaign_path(@note.commentable)
     elsif @note.commentable_type == "Seshion"
-      redirect_to campaign_seshion_path(@commentable.campaign, @commentable)
+      redirect_to campaign_seshion_path(@note.commentable.campaign, @note.commentable)
     end
   end
 

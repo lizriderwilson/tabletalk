@@ -1,4 +1,5 @@
 <%= form_for [commentable, @note], url: path do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.text_area :content, placeholder: "Add a comment", class: "w-full h-24 border-1 border-primary-600 rounded-md focus:ring-2 focus:ring-primary-600 focus:border-none" %>
     <%= f.submit "Create Note", class: "btn-secondary mt-1" %>
 <% end %>
