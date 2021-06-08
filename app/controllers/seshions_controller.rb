@@ -26,8 +26,8 @@ class SeshionsController < ApplicationController
 
   def show
     @notes = @seshion.notes.all
-    if helpers.current_user
-      @note = Note.new(commentable_id: @seshion.id, user_id: helpers.current_user.id)
+    if current_user
+      @note = Note.new(commentable_id: @seshion.id, user_id: current_user.id)
     end
   end
 

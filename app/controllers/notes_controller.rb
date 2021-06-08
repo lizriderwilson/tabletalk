@@ -10,7 +10,7 @@ class NotesController < ApplicationController
     if !@note
       redirect_to campaigns_path, alert: "Note not found"
     else
-      if @note.user != helpers.current_user || !helpers.current_user
+      if @note.user != current_user || !current_user
         redirect_based_on_commentable_type
       end
     end

@@ -11,7 +11,7 @@ class CharactersController < ApplicationController
         if !@campaign
             redirect_to campaigns_path, alert: "Campaign not found."
         else
-            @character = Character.new(campaign_id: params[:campaign_id], player_id: helpers.current_user)
+            @character = Character.new(campaign_id: params[:campaign_id], player_id: current_user)
             redirect_if_not_allowed_to_join
         end
     end
@@ -65,13 +65,13 @@ class CharactersController < ApplicationController
     end
 
     def redirect_if_not_allowed_to_join
-        if helpers.current_user == @campaign.gm || @campaign.players.include?(helpers.current_user) || !helpers.current_user
+        if current_user == @campaign.gm || @campaign.players.include?(current_user) || !current_user
             redirect_to campaign_path(@campaign), alert: "You cannot join this campaign! You are either the gm, already a player, or not logged in."
         end
     end
 
     def redirect_if_not_allowed_to_edit
-        if helpers.current_user != @character.player
+        if current_user != @character.player
             redirect_to campaign_character_path(@campaign, @character)
         end
     end

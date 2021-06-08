@@ -12,11 +12,11 @@ class CampaignsController < ApplicationController
   end
 
   def new
-    if helpers.current_user
+    if current_user
       if params[:user_id] && !User.find_by(id: params[:user_id])
         redirect_to campaigns_path, alert: "User not found"
-      elsif params[:user_id] && User.find_by(id: params[:user_id]) != helpers.current_user
-        redirect_to new_user_campaign_path(helpers.current_user)
+      elsif params[:user_id] && User.find_by(id: params[:user_id]) != current_user
+        redirect_to new_user_campaign_path(current_user)
       else
         @campaign = Campaign.new(gm_id: session[:user_id])
       end
@@ -36,8 +36,8 @@ class CampaignsController < ApplicationController
 
   def show
     @notes = @campaign.notes.all
-    if helpers.current_user
-      @note = Note.new(commentable_id: @campaign.id, user_id: helpers.current_user.id)
+    if current_user
+      @note = Note.new(commentable_id: @campaign.id, user_id: current_user.id)
     end
   end
 
@@ -67,7 +67,7 @@ class CampaignsController < ApplicationController
 
   def destroy
     @campaign.destroy
-    redirect_to user_path(helpers.current_user)
+    redirect_to user_path(current_user)
   end
 
   private
