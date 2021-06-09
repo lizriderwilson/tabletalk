@@ -14,11 +14,15 @@ class UsersController < ApplicationController
     end
 
     def new
-        @user = User.new
+        if current_user
+            redirect_to user_path(current_user)
+        else
+            @user = User.new
+        end
     end
 
     def create
-        @user = User.create(user_params)
+        @user = User.new(user_params)
         if @user.save
             session[:user_id] = @user.id
             redirect_to user_path(@user), notice: "Signup successful!"
@@ -33,6 +37,11 @@ class UsersController < ApplicationController
     end
 
     def edit
+        if current_user.nil?
+            redirect_to user_path(@user), notice: "You do not have permission to edit this user."
+        elsif @user != current_user
+            redirect_to edit_user_path(current_user)
+        end
     end
 
     def update

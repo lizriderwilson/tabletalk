@@ -35,7 +35,6 @@ class CampaignsController < ApplicationController
   end
 
   def show
-    @notes = @campaign.notes.all
     if current_user
       @note = Note.new(commentable_id: @campaign.id, user_id: current_user.id)
     end
@@ -43,12 +42,12 @@ class CampaignsController < ApplicationController
 
   def edit
     if params[:user_id]
-      gm = User.find_by(id: params[:user_id])
-      if gm.nil?
+      user = User.find_by(id: params[:user_id])
+      if user.nil?
         redirect_to campaigns_path, alert: "User not found"
       else
-        @campaign = gm.campaigns_as_gm.find_by(id: params[:id])
-        redirect_to user_campaigns_path(gm), alert: "Campaign not found" if @campaign.nil?
+        @campaign = user.campaigns_as_gm.find_by(id: params[:id])
+        redirect_to user_campaigns_path(user), alert: "Campaign not found" if @campaign.nil?
         redirect_if_not_gm(campaign_path(@campaign), "You can't edit a campaign that you don't GM")
       end
     else

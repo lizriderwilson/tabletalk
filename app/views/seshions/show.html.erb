@@ -16,7 +16,7 @@
         <div class="py-2">
             <%= display_note_form_if_campaign_includes_current_user(@seshion, campaign_seshion_notes_path(@campaign, @seshion, @note)) %>
         </div>
-        <% @notes.each do |note| %>
+        <% @seshion.notes.each do |note| %>
             <div><%= note.content %> <%= display_edit_link_if_note_belongs_to_current_user(note) %></div>
         <% end %>
     </div>

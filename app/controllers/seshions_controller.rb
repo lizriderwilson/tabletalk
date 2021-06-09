@@ -10,7 +10,7 @@ class SeshionsController < ApplicationController
   end
 
   def new
-    if !@campaign
+    if @campaign.nil?
       redirect_to campaigns_path, alert: "Campaign not found."
     else
       @seshion = Seshion.new(campaign_id: params[:campaign_id])
@@ -19,24 +19,22 @@ class SeshionsController < ApplicationController
   end
 
   def create
-    @seshion = Seshion.new(seshion_params)
-    @seshion.save
+    @seshion = Seshion.create(seshion_params)
     redirect_to campaign_seshions_path(@campaign)
   end
 
   def show
-    @notes = @seshion.notes.all
     if current_user
       @note = Note.new(commentable_id: @seshion.id, user_id: current_user.id)
     end
   end
 
   def edit
-    if !@campaign
+    if @campaign.nil?
       redirect_to campaigns_path, alert: "Campaign not found."
     else
       @seshion = @campaign.seshions.find_by(id: params[:id])
-      if !@seshion
+      if @seshion.nil?
         redirect_to campaign_seshions_path(@campaign), alert: "Session not found in this campaign."
       else
         redirect_if_not_gm(campaign_seshion_path(@campaign, @seshion), "You can't edit a session if you're not the GM")

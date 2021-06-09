@@ -7,7 +7,7 @@ class NotesController < ApplicationController
   end
 
   def edit
-    if !@note
+    if @note.nil?
       redirect_to campaigns_path, alert: "Note not found"
     else
       if @note.user != current_user || !current_user

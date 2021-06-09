@@ -1,6 +1,6 @@
 class CharactersController < ApplicationController
     before_action :find_character, only: [:show, :update, :destroy]
-    before_action :find_campaign, only: [:new, :create, :show, :edit, :update, :destroy]
+    before_action :find_campaign, except: [:index]
 
     def index
         @user = User.find_by(id: params[:user_id])
@@ -8,7 +8,7 @@ class CharactersController < ApplicationController
     end
 
     def new
-        if !@campaign
+        if @campaign.nil?
             redirect_to campaigns_path, alert: "Campaign not found."
         else
             @character = Character.new(campaign_id: params[:campaign_id], player_id: current_user)
@@ -29,11 +29,11 @@ class CharactersController < ApplicationController
     end
 
     def edit
-        if !@campaign
+        if @campaign.nil?
             redirect_to campaigns_path, alert: "Campaign not found."
         else
             @character = @campaign.characters.find_by(id: params[:id])
-            if !@character
+            if @character.nil?
                 redirect_to campaign_path(@campaign), alert: "Character not found in this campaign."
             else
                 redirect_if_not_allowed_to_edit

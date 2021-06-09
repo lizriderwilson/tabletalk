@@ -18,7 +18,7 @@
                 <div class="py-2">
                     <%= display_note_form_if_campaign_includes_current_user(@campaign, campaign_notes_path(@campaign, @note)) %>
                 </div>
-                <% @notes.each do |note| %>
+                <% @campaign.notes.each do |note| %>
                     <div class="bg-primary-100 my-1 p-2 flex justify-between rounded-md">
                         <div class="flex">
                             <div class="bg-white h-20 w-20 flex flex-col items-center justify-around rounded-sm">
