@@ -28,8 +28,8 @@ class UsersController < ApplicationController
     end
 
     def show
-        @campaigns = @user.campaigns
-        @characters = @user.characters
+        @campaigns = @user.campaigns.last(6)
+        @characters = @user.characters.last(6)
     end
 
     def edit

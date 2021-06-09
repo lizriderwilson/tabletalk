@@ -1,6 +1,6 @@
 module StaticHelper
 
-    def login_signup_or_user_link
+    def display_login_signup_or_user_link
         if current_user
             [
                 { 
@@ -9,7 +9,7 @@ module StaticHelper
                 }
             ]
         else
-                        [
+            [
                 { 
                     label: "Login",
                     path: login_path

@@ -6,7 +6,7 @@
         </div>
         <div>
             <%= link_to "Edit Session", edit_campaign_seshion_path(@campaign, @seshion), class: "btn" if @campaign.gm == current_user%>
-            <%= delete_asset("Delete Session", campaign_seshion_path(@campaign, @seshion), "btn", "Are you sure?") %>
+            <%= display_delete_asset_link("Delete Session", campaign_seshion_path(@campaign, @seshion), "btn", "Are you sure?") %>
         </div>
     </div>
 </div>

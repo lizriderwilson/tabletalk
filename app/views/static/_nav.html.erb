@@ -18,7 +18,7 @@
         <div class="bg-primary-700 sm:bg-primary-800 px-4 py-3 pb-4 text-right sm:flex sm:items-center">
             <%= link_to "Campaigns", campaigns_path, class: "block sm:inline-block sm:px-2 rounded py-0.5 text-secondary-200 hover:bg-primary-900" %>
             <%= link_to "Users", users_path, class: "block sm:inline-block sm:px-2 rounded py-0.5 text-secondary-200 hover:bg-primary-900" %>
-            <% login_signup_or_user_link.each do |link| %>
+            <% display_login_signup_or_user_link.each do |link| %>
                 <%= link_to link[:label], link[:path], class: "inline-block sm:px-2 rounded py-0.5 px-2 mx-1 text-primary-900 bg-secondary-200 hover:bg-secondary-300"%>
             <% end %>
         </div>

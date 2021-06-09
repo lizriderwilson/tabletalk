@@ -4,7 +4,7 @@
         <div class="bg-primary-100 flex flex-col px-8 pb-4" id="description">
             <div class="py-8 flex justify-between items-center">
                 <h2 class="header mb-2"><%= @character.name %></h2>
-                <%= edit_btn_if_character_player %>
+                <%= display_edit_btn_if_character_belongs_to_player %>
             </div>
             <div>
                 <p><%= @character.bio %></p>
