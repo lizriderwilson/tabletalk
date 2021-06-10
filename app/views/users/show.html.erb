@@ -12,14 +12,14 @@
                 <% end %>
             </div>
             <div class="grid lg:grid-cols-3 gap-2 mb-4">
-                <% @campaigns.each do |c| %>
+                <% @campaigns.each do |campaign| %>
                     <div class="bg-primary-100 p-3">
-                        <h3 class="text-lg font-semibold"><%= link_to c.name, campaign_path(c) %></h3>
-                        <p><%= c.game_system %></p>
-                        <p><%= c.next_seshion %></p>
+                        <h3 class="text-lg font-semibold"><%= link_to campaign.name, campaign_path(campaign) %></h3>
+                        <p><%= campaign.game_system %></p>
+                        <p><%= campaign.next_seshion %></p>
                             <div class="mt-2">
-                                <%= link_to "Go to game", campaign_path(c), class: "btn-secondary" %>
-                                <%= link_to "Edit", edit_user_campaign_path(current_user, c), class: "btn-secondary" if c.gm == current_user %>
+                                <%= link_to "Go to game", campaign_path(campaign), class: "btn-secondary" %>
+                                <%= link_to "Edit", edit_user_campaign_path(current_user, campaign), class: "btn-secondary" if campaign.gm == current_user %>
                             </div>
                     </div>
                 <% end %>
@@ -34,13 +34,13 @@
                 <h2 class="header"><%= display_user_name %> Characters</h2>
             </div>
             <div class="grid lg:grid-cols-3 gap-2 mb-4">
-                <% @characters.each do |ch| %>
+                <% @characters.each do |character| %>
                     <div class="bg-primary-100 p-3">
-                        <h3 class="text-lg font-semibold"><%= link_to ch.name, campaign_character_path(@user,ch) %></h3>
-                        <p><%= ch.campaign.name %></p>
+                        <h3 class="text-lg font-semibold"><%= link_to character.name, campaign_character_path(@user, character) %></h3>
+                        <p><%= character.campaign.name %></p>
                         <div class="mt-2">
-                            <%= link_to "View", campaign_character_path(ch.campaign,ch), class: "btn-secondary" %>
-                            <%= link_to "Edit", edit_campaign_character_path(ch.campaign, ch), class: "btn-secondary" if ch.player == current_user %>
+                            <%= link_to "View", campaign_character_path(character.campaign, character), class: "btn-secondary" %>
+                            <%= link_to "Edit", edit_campaign_character_path(character.campaign, character), class: "btn-secondary" if character.player == current_user %>
                         </div>
                     </div>
                 <% end %>

@@ -6,15 +6,15 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <% @campaigns.each do |c| %>
+        <% @campaigns.each do |campaign| %>
         <div class="bg-secondary-100 h-48 p-4 flex flex-col justify-between">
             <div>
-                <%= link_to c.name, campaign_path(c), class: "text-2xl font-semibold" %>
-                <p class="text-lg font-medium"><%= c.game_system %></p>
-                <p><%= display_number_of_players(c) %></p>
+                <%= link_to campaign.name, campaign_path(campaign), class: "text-2xl font-semibold" %>
+                <p class="text-lg font-medium"><%= campaign.game_system %></p>
+                <p><%= display_number_of_players(campaign) %></p>
             </div>
             <div>
-                <p class="text-sm">Next session: <%= c.next_seshion %></p>
+                <p class="text-sm">Next session: <%= campaign.next_seshion %></p>
             </div>
         </div>
         <% end %>

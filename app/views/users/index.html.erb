@@ -2,7 +2,10 @@
 
     <div class="mb-8">
         <h1 class="header mb-1">Users</h1>
-        <p>This is a list of all the users on the site. Feel free to browse here to find someone new to play with!</p>
+        <p class="mb-4">This is a list of all the users on the site. Feel free to browse here to find someone new to play with!</p>
+        <%= link_to "GMs", gms_users_path, class: "btn-secondary" %>
+        <%= link_to "Players", players_users_path, class: "btn-secondary" %>
+        <%= link_to "All users", users_path, class: "btn-secondary" %>
     </div>
 
     <%= render 'display_users' %>

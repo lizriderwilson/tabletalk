@@ -10,13 +10,6 @@ class Campaign < ApplicationRecord
 
     scope :public_games, -> { where(is_public: true) }
 
-    #Class methods
-
-    # def self.sort_by_player_count
-    #     Campaign
-    # end
-
-    #Instance methods
     def visibility
         self.is_public ? "Public" : "Private"
     end
@@ -31,7 +24,7 @@ class Campaign < ApplicationRecord
 
     def next_seshion
         if self.seshions.empty?
-            "NA"
+            "N/A"
         else
             self.seshions.order('start_time DESC').first.start_time.to_formatted_s(:month_day_comma_year_time)
         end
